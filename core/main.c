@@ -5,38 +5,43 @@
 #include "arithmetic.h"
 #include "algorithms.h"
 #include <time.h>
+#include <string.h>
+#include <stdbool.h>
 
 
-int main(void) {
+int main(int argc, char** argv) {
 	srand(time(NULL));
-	
+
+	bool running = true;
+
 	intx_t msg = intx_from_64(47);
 	intx_t encrypted = intx_from_64(0);
 	intx_t decrypted = intx_from_64(0);
 
 	public_key puk;
 	private_key prk;
-	
-	generate_keypair(&puk, &prk);
-	
+
 	intx_print_h(msg);
 
-	printf("public key\n");
-	printf("e: ");
-	intx_print_h(puk.e);
-	printf("n: ");
-	intx_print_h(puk.n);
-	printf("private key: ");
-	intx_print_h(prk.d);
+				generate_keypair(&puk, &prk);
 
-	encrypt(msg, puk, encrypted);
-	printf("\nEncrypted message\n");
-	intx_print_h(encrypted);
+				printf("public key\n");
+				printf("e: ");
+				intx_print_h(puk.e);
+				printf("n: ");
+				intx_print_h(puk.n);
+				printf("private key: ");
+				intx_print_h(prk.d);
 
-	decrypt(encrypted, prk, decrypted);
-	printf("\nDecrypted message\n");
-	intx_print_h(decrypted);
+				encrypt(msg, puk, encrypted);
+				printf("\nEncrypted message\n");
+				intx_print_h(encrypted);
 
+				decrypt(encrypted, prk, decrypted);
+				printf("\nDecrypted message\n");
+				intx_print_h(decrypted);
+
+	free(msg);
 	free(encrypted);
 	free(decrypted);
 

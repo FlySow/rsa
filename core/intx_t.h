@@ -2,7 +2,7 @@
 #define __INTX__
 
 
-#define INT_SIZE 32
+#define INT_SIZE 8
 
 #include <stdint.h>
 #include <stdbool.h>
