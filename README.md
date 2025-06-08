@@ -13,4 +13,4 @@ Création d'un programme qui gèrent le chiffrment et le déchiffrment de RSA, �
 
 <h4>Cryptanalyse</h4>
 
-Implémentation de la méthode du Rho de Pollard en $O(\sqrt(n))$. Et implémentation, bien que non efficace acutuellement, du crible quadratique.
+Implémentation de la méthode du Rho de Pollard en $O(n^{1/4})$. Et implémentation, bien que non efficace acutuellement, du crible quadratique.
