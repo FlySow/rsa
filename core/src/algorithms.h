@@ -13,10 +13,11 @@ typedef struct private_key_s {
 	uint32_t n[INT_SIZE];
 } private_key;
 
-void generate_keypair(public_key* puk, private_key* prk);
+void generate_keypair(public_key* puk, private_key* prk, uint64_t mask);
 
 intx_t encrypt(intx_t in, public_key puk, intx_t out);
 
 intx_t decrypt(intx_t in, private_key prk, intx_t out);
+
 
 #endif

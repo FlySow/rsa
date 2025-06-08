@@ -110,16 +110,29 @@ bool fermat_test(intx_t p, int k) {
 }
 
 
-intx_t generate_prime(bool (* primality_test)(intx_t p, int k), int k, intx_t out) {
+intx_t generate_prime(bool (* primality_test)(intx_t p, int k), int k, intx_t out, uint64_t mask) {
 	intx_rand(out, true, INT_SIZE/4);
 	out[0] |= 1;
+	
+	out[0] &= mask;
+	
+	while(out[0] == 1) {
+		intx_rand(out, true, INT_SIZE/4);
+		out[0] |= 1;
+		out[0] &= mask;
+	}
+
+	//printf("%d\n", out[0]);
 
 	while(!primality_test(out, k)) intx_push32(out, 2, out);
+	
+	//intx_print_h(out);
 
 	return out;
 }
 
 intx_t inv_mod(intx_t a, intx_t n, intx_t out) {
+	//intx_print_h(n);
 	assert(!intx_is_zero(a) && !intx_is_zero(n));
 	
 	uint32_t gcd[INT_SIZE];

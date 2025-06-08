@@ -46,7 +46,7 @@ bool intx_get_digit(intx_t n, uint32_t i) {
 
 
 void intx_print_h(intx_t n) {
-	for(int i = INT_SIZE-1; i >= 0; i--)
+	for(int i = INT_SIZE/2-1; i >= 0; i--)
 		printf("%08x", n[i]);
 	printf("\n");
 }

@@ -7,6 +7,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 
 int main(int argc, char** argv) {
@@ -21,26 +22,40 @@ int main(int argc, char** argv) {
 	public_key puk;
 	private_key prk;
 
+	clock_t t;
+
+	t = clock();
+
+
+	printf("Entier de taille: %d bits\n", 32*INT_SIZE/2); 
+	
+	printf("Message initial\n");
+
 	intx_print_h(msg);
 
-				generate_keypair(&puk, &prk);
+				generate_keypair(&puk, &prk, 0xFFFFFFFF);
 
-				printf("public key\n");
+				printf("Clé publique\n");
 				printf("e: ");
 				intx_print_h(puk.e);
 				printf("n: ");
 				intx_print_h(puk.n);
-				printf("private key: ");
+				printf("Clé privée\n");
+				printf("d: ");
 				intx_print_h(prk.d);
 
 				encrypt(msg, puk, encrypted);
-				printf("\nEncrypted message\n");
+				printf("\nMessage chiffré\n");
 				intx_print_h(encrypted);
 
 				decrypt(encrypted, prk, decrypted);
-				printf("\nDecrypted message\n");
+				printf("\nMessage déchiffré\n");
 				intx_print_h(decrypted);
 
+	t = clock() - t;
+
+	printf("\nTemps pris: %f ms\n", ((double) t)/CLOCKS_PER_SEC*1000);
+	
 	free(msg);
 	free(encrypted);
 	free(decrypted);
